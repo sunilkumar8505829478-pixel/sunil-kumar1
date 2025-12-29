@@ -8,7 +8,8 @@ export interface SystemStat {
 
 export interface FileEntry {
   name: string;
-  type: 'file' | 'directory';
+  type: 'file' | 'directory' | 'disk';
+  extension?: string;
   size?: string;
   modified: string;
 }
@@ -18,4 +19,10 @@ export interface Message {
   role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: Date;
+}
+
+export interface Setting {
+  key: string;
+  description: string;
+  value: string | boolean | number;
 }

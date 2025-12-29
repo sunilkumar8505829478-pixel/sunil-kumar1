@@ -5,10 +5,12 @@ import { SystemStats } from './components/SystemStats';
 import { FileSystem } from './components/FileSystem';
 import { Keyboard } from './components/Keyboard';
 import { WorldMap } from './components/WorldMap';
-import { Shield, Clock, Wifi, Zap, Lock, Menu } from 'lucide-react';
+import { SettingsModal } from './components/SettingsModal';
+import { Shield, Clock, Wifi, Zap, Lock, Settings } from 'lucide-react';
 
 const App: React.FC = () => {
   const [time, setTime] = useState(new Date());
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -16,80 +18,97 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen p-4 flex flex-col gap-4 overflow-hidden relative">
+    <div className="h-screen w-screen p-3 flex flex-col gap-3 overflow-hidden relative selection:bg-[#00f2ff] selection:text-black">
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#00f2ff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+           style={{ backgroundImage: 'linear-gradient(to right, #00f2ff 1px, transparent 1px), linear-gradient(to bottom, #00f2ff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
 
       {/* Header Bar */}
-      <header className="flex items-center justify-between px-4 py-2 cyber-border rounded-lg bg-black/60 z-10">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Shield className="text-[#00f2ff] animate-pulse" size={20} />
-            <span className="orbitron tracking-[0.3em] font-bold text-lg glow-text">CYBER-SHELL</span>
+      <header className="flex items-center justify-between px-4 py-1.5 cyber-border rounded bg-black/80 z-10 border-[#00f2ff]/40">
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-3">
+            <Shield className="text-[#00f2ff] animate-pulse drop-shadow-[0_0_5px_#00f2ff]" size={18} />
+            <span className="orbitron tracking-[0.4em] font-bold text-base glow-text">CYBER-SHELL</span>
           </div>
-          <div className="hidden md:flex gap-4 text-[10px] orbitron text-[#00f2ff]/50">
-            <div className="flex items-center gap-1"><Zap size={10} /> CORE: ONLINE</div>
-            <div className="flex items-center gap-1"><Lock size={10} /> ENCRYPT: AES-256</div>
-            <div className="flex items-center gap-1"><Wifi size={10} /> LATENCY: 24ms</div>
+          <div className="hidden lg:flex gap-6 text-[9px] orbitron text-[#00f2ff]/60">
+            <div className="flex items-center gap-1.5"><Zap size={10} /> SYS: STABLE</div>
+            <div className="flex items-center gap-1.5"><Lock size={10} /> RSA: ACTIVE</div>
+            <div className="flex items-center gap-1.5"><Wifi size={10} /> 10G-UPLINK</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="flex flex-col items-end">
-            <div className="flex items-center gap-2 text-[#00f2ff] orbitron text-lg font-bold">
-              <Clock size={16} className="text-[#00f2ff]/60" />
-              {time.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-            </div>
-            <div className="text-[10px] orbitron text-[#00f2ff]/40 tracking-wider">
-              {time.toLocaleDateString([], { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }).toUpperCase()}
-            </div>
+        <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4 border-x border-[#00f2ff]/20 px-4">
+             <div className="flex flex-col items-center">
+                <span className="text-[8px] orbitron text-[#00f2ff]/40">LATENCY</span>
+                <span className="text-xs orbitron font-bold">12ms</span>
+             </div>
+             <div className="flex flex-col items-center">
+                <span className="text-[8px] orbitron text-[#00f2ff]/40">TEMP</span>
+                <span className="text-xs orbitron font-bold text-orange-400">42°C</span>
+             </div>
           </div>
-          <button className="p-2 hover:bg-[#00f2ff]/10 rounded border border-[#00f2ff]/20 transition-colors">
-            <Menu size={20} className="text-[#00f2ff]" />
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col items-end">
+              <div className="text-sm orbitron font-bold tracking-widest flex items-center gap-2">
+                <Clock size={12} className="opacity-50" />
+                {time.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+              </div>
+              <div className="text-[8px] orbitron text-[#00f2ff]/30 tracking-widest">
+                {time.toLocaleDateString([], { weekday: 'short', month: 'short', day: '2-digit' }).toUpperCase()}
+              </div>
+            </div>
+            <button 
+              onClick={() => setIsSettingsOpen(true)}
+              className="p-1.5 hover:bg-[#00f2ff]/10 rounded border border-[#00f2ff]/20 transition-all active:scale-90"
+            >
+              <Settings size={18} className="text-[#00f2ff]/80" />
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Main Content Grid */}
-      <main className="flex-1 grid grid-cols-12 gap-4 overflow-hidden">
-        {/* Left Side: Stats & Info */}
-        <div className="col-span-12 lg:col-span-3 flex flex-col gap-4 overflow-y-auto pr-1">
+      <main className="flex-1 grid grid-cols-12 gap-3 overflow-hidden">
+        {/* Left HUD: System Monitoring */}
+        <div className="col-span-12 md:col-span-3 flex flex-col gap-3 overflow-y-auto pr-1 custom-scrollbar">
           <SystemStats />
           <WorldMap />
-          <div className="cyber-border rounded-lg p-3 bg-black/40 flex-1 min-h-[150px]">
-            <h3 className="orbitron text-[10px] text-[#00f2ff]/60 mb-3 tracking-widest uppercase">Kernel Modules</h3>
-            <div className="space-y-2">
-              {['NET_BRIDGE', 'SEC_VAULT', 'AI_CORE', 'FS_SYNC'].map((mod, i) => (
-                <div key={i} className="flex items-center justify-between text-[11px] font-mono group cursor-help">
-                  <span className="text-[#00f2ff]/40 group-hover:text-[#00f2ff] transition-colors">0x00A{i}: {mod}</span>
-                  <span className="text-green-500 font-bold opacity-60 group-hover:opacity-100">[ OK ]</span>
+          <div className="cyber-border rounded bg-black/60 p-3 flex-1 min-h-[120px]">
+            <h3 className="orbitron text-[9px] text-[#00f2ff]/40 mb-2 tracking-[0.2em] uppercase border-b border-[#00f2ff]/10 pb-1">Process Matrix</h3>
+            <div className="space-y-1.5 font-mono text-[10px]">
+              {[
+                { pid: '1024', user: 'root', cpu: '0.2%', cmd: 'kernel_gemini' },
+                { pid: '2048', user: 'root', cpu: '1.4%', cmd: 'xorg_server' },
+                { pid: '4096', user: 'guest', cpu: '0.0%', cmd: 'bash_uplink' },
+                { pid: '8192', user: 'root', cpu: '4.2%', cmd: 'neural_bridge' }
+              ].map((p, i) => (
+                <div key={i} className="flex justify-between items-center text-[#00f2ff]/60 hover:text-[#00f2ff] transition-colors cursor-default">
+                  <span className="w-8 opacity-40">{p.pid}</span>
+                  <span className="flex-1 px-2">{p.cmd}</span>
+                  <span className="text-green-500 font-bold">{p.cpu}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Center: Main Terminal Interface */}
-        <div className="col-span-12 lg:col-span-6 h-full">
+        {/* Center HUD: Terminal Interface */}
+        <div className="col-span-12 md:col-span-5 h-full">
           <Terminal />
         </div>
 
-        {/* Right Side: File System & Actions */}
-        <div className="col-span-12 lg:col-span-3 flex flex-col gap-4 overflow-hidden">
+        {/* Right HUD: Navigation & Data Streams */}
+        <div className="col-span-12 md:col-span-4 flex flex-col gap-3 overflow-hidden">
           <FileSystem />
-          <div className="cyber-border rounded-lg p-3 bg-black/40 h-1/3">
-             <h3 className="orbitron text-[10px] text-[#00f2ff]/60 mb-2 tracking-widest uppercase">Recent Uplink Signals</h3>
-             <div className="space-y-2 overflow-hidden">
-               {[
-                 { src: '192.168.1.1', type: 'TCP_ACK', bytes: '542B' },
-                 { src: '10.0.0.42', type: 'UDP_IN', bytes: '2.1KB' },
-                 { src: '8.8.8.8', type: 'DNS_RES', bytes: '128B' }
-               ].map((log, i) => (
-                 <div key={i} className="flex justify-between text-[9px] font-mono border-b border-[#00f2ff]/5 pb-1">
-                   <span className="text-pink-500/70">{log.src}</span>
-                   <span className="text-[#00f2ff]/40">{log.type}</span>
-                   <span className="text-yellow-500/70">{log.bytes}</span>
+          <div className="cyber-border rounded bg-black/60 p-3 h-1/3">
+             <h3 className="orbitron text-[9px] text-[#00f2ff]/40 mb-2 tracking-[0.2em] uppercase border-b border-[#00f2ff]/10 pb-1">Secure Data Streams</h3>
+             <div className="space-y-1 overflow-y-auto h-full pr-1 font-mono text-[9px]">
+               {Array.from({ length: 15 }).map((_, i) => (
+                 <div key={i} className="flex justify-between border-b border-[#00f2ff]/5 py-0.5 opacity-60">
+                   <span className="text-[#00f2ff]">{(Math.random() * 0xFFFFFF << 0).toString(16).toUpperCase()}</span>
+                   <span className="text-pink-500">{(Math.random() * 0xFFFFFF << 0).toString(16).toUpperCase()}</span>
+                   <span className="text-yellow-500">SIGNAL_{i}</span>
                  </div>
                ))}
              </div>
@@ -98,15 +117,18 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer Area: Virtual Keyboard */}
-      <footer className="z-10">
+      <footer className="z-10 mt-auto">
         <Keyboard />
       </footer>
 
-      {/* Corner Accents */}
-      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#00f2ff] opacity-40 pointer-events-none m-2"></div>
-      <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#00f2ff] opacity-40 pointer-events-none m-2"></div>
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#00f2ff] opacity-40 pointer-events-none m-2"></div>
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#00f2ff] opacity-40 pointer-events-none m-2"></div>
+      {/* Settings Modal */}
+      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+
+      {/* Corner Decorative Elements */}
+      <div className="fixed top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[#00f2ff]/30 pointer-events-none m-1"></div>
+      <div className="fixed top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#00f2ff]/30 pointer-events-none m-1"></div>
+      <div className="fixed bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-[#00f2ff]/30 pointer-events-none m-1"></div>
+      <div className="fixed bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[#00f2ff]/30 pointer-events-none m-1"></div>
     </div>
   );
 };

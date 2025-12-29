@@ -1,20 +1,20 @@
 # 🌐 CyberShell-EDEX
 
 > **System Status: [ONLINE]**  
-> **Kernel Version: 3.4.0-world**  
+> **Kernel Version: 3.4.0-NEURAL**  
 > **Auth Level: ROOT**
 
 CyberShell-EDEX is a high-performance, sci-fi inspired system dashboard and terminal interface. Heavily inspired by the legendary **eDEX-UI**, this application transforms your browser into a futuristic holographic workstation, combining real-time simulated system metrics with a powerful AI-driven terminal kernel.
 
 ![Aesthetic](https://img.shields.io/badge/Aesthetic-Cyberpunk-00f2ff?style=for-the-badge)
-![Built With](https://img.shields.io/badge/Built_With-React_|_Tailwind_|_Gemini-00f2ff?style=for-the-badge)
+![Built With](https://img.shields.io/badge/Built_With-React_|_Tailwind_|_AI-00f2ff?style=for-the-badge)
 
 ---
 
 ## 🚀 Key Features
 
 ### 💻 Integrated AI Kernel
-The "Core Terminal" isn't just a shell—it's powered by the ** AI ** . It acts as the system's sentient kernel, capable of:
+The "Core Terminal" isn't just a shell—it's powered by a state-of-the-art **Neural AI** model. It acts as the system's sentient kernel, capable of:
 - Processing complex technical inquiries.
 - Simulating system scans and protocol deployments.
 - Providing technical assistance in a concise, cyberpunk-appropriate tone.
@@ -38,6 +38,7 @@ Visual monitoring of vital system signs using advanced data visualization:
 ## 🛠️ Technology Stack
 
 - **Framework:** [React 19+](https://react.dev/)
+- **Intelligence:** [Generative AI API](https://ai.google.dev/) (Neural-Flash-Preview)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Visualization:** [Recharts](https://recharts.org/)
@@ -67,7 +68,7 @@ Try typing these into the **Core Terminal**:
 
 ## ⚠️ Disclaimer
 
-*This is a visual simulation. The file system, network logs, and hardware metrics are simulated for aesthetic purposes and do not represent the actual state of the host machine's hardware. The terminal uses the Gemini API for intelligence and requires an active internet connection.*
+*This is a visual simulation. The file system, network logs, and hardware metrics are simulated for aesthetic purposes and do not represent the actual state of the host machine's hardware. The terminal uses a generative AI API for intelligence and requires an active internet connection.*
 
 ---
 
