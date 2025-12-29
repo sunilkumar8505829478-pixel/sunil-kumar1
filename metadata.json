@@ -1,0 +1,7 @@
+{
+  "name": "CyberShell-EDEX",
+  "description": "A sci-fi inspired system dashboard and terminal interface mimicking the aesthetics of eDEX-UI, featuring real-time simulated system monitoring, file navigation, and an integrated Gemini AI core.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
