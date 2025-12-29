@@ -1,7 +1,7 @@
 # 🌐 CyberShell-EDEX
 
 > **System Status: [ONLINE]**  
-> **Kernel Version: 3.4.0-GEMINI**  
+> **Kernel Version: 3.4.0-world**  
 > **Auth Level: ROOT**
 
 CyberShell-EDEX is a high-performance, sci-fi inspired system dashboard and terminal interface. Heavily inspired by the legendary **eDEX-UI**, this application transforms your browser into a futuristic holographic workstation, combining real-time simulated system metrics with a powerful AI-driven terminal kernel.
@@ -13,8 +13,8 @@ CyberShell-EDEX is a high-performance, sci-fi inspired system dashboard and term
 
 ## 🚀 Key Features
 
-### 💻 Integrated Gemini Kernel
-The "Core Terminal" isn't just a shell—it's powered by the **Gemini 3 Flash** model. It acts as the system's sentient kernel, capable of:
+### 💻 Integrated AI Kernel
+The "Core Terminal" isn't just a shell—it's powered by the ** AI ** . It acts as the system's sentient kernel, capable of:
 - Processing complex technical inquiries.
 - Simulating system scans and protocol deployments.
 - Providing technical assistance in a concise, cyberpunk-appropriate tone.
@@ -38,7 +38,6 @@ Visual monitoring of vital system signs using advanced data visualization:
 ## 🛠️ Technology Stack
 
 - **Framework:** [React 19+](https://react.dev/)
-- **Intelligence:** [Google Gemini API](https://ai.google.dev/) (`gemini-3-flash-preview`)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Visualization:** [Recharts](https://recharts.org/)
